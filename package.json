@@ -1,0 +1,24 @@
+{
+  "name": "oem-demo",
+  "version": "1.0.0",
+  "description": "Demo site for the oem framework https://github.com/kvnlnt/oem",
+  "main": "index.js",
+  "scripts": {
+    "demo": "node ./oem",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kvnlnt/oem-demo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kvnlnt/oem-demo/issues"
+  },
+  "homepage": "https://github.com/kvnlnt/oem-demo#readme",
+  "dependencies": {
+    "chalk": "^1.1.3",
+    "express": "^4.14.0"
+  }
+}
