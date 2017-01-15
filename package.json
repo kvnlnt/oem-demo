@@ -2,7 +2,7 @@
   "name": "oem-demo",
   "version": "1.0.0",
   "description": "Demo site for the oem framework https://github.com/kvnlnt/oem",
-  "main": "index.js",
+  "main": "demo.js",
   "scripts": {
     "demo": "node ./oem",
     "test": "echo \"Error: no test specified\" && exit 1"
