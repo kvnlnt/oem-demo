@@ -1,10 +1,130 @@
-html,body,div,form,fieldset,legend,label{background-color:#000000;margin:0;padding:0}
-table{border-collapse:collapse;border-spacing:0}
-th,td{text-align:left;vertical-align:top}
-h1,h2,h3,h4,h5,h6,th,td,caption{font-weight:normal}
-img{border:0}
-section h1{font-size:32px}
-section h2{font-size:24px}
-section h3{font-size:20px}
-#hamburger{position:fixed;top:20px;right:20px}
-#menuDrawer h2{margin:10px;}
+/**
+ * RESET
+ */
+html, body, div, form, fieldset, legend, label {
+    background-color: #111111;
+    color: #F2F2F2;
+    margin: 0;
+    padding: 0;
+}
+body {
+    max-width: 640px;
+    margin:0 auto;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+th, td {
+    text-align: left;
+    vertical-align: top;
+}
+h1, h2, h3, h4, h5, h6, th, td, caption {
+    font-weight: normal;
+}
+img {
+    border: 0;
+}
+section h1 {
+    font-size: 32px;
+}
+section h2 {
+    font-size: 24px;
+}
+section h3 {
+    font-size: 20px;
+}
+
+/**
+ * TYPOGRAPHY
+ */
+* {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1 {
+    font-size: 24px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+    line-height: 26.4px;
+}
+h3 {
+    font-size: 14px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+    line-height: 15.4px;
+}
+p {
+    font-size: 14px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 20px;
+}
+blockquote {
+    font-size: 21px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 30px;
+}
+pre {
+    font-size: 13px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 18.5714px;
+}
+
+dt, dd, dl {
+    margin:0;
+}
+
+dl.data dt {
+    font-weight: bold;
+    line-height: 64px;
+    text-transform: uppercase;
+}
+
+/**
+ * COMPONENTS
+ */
+
+#genesis-haus {
+    max-width: 960px;
+    margin:0 auto;
+    padding:50px;
+}
+p.tagline {
+    font-size: 32px;
+    color: #a2a2a2;
+    line-height: 28px;
+}
+#hamburger {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+}
+#menuDrawer {
+    color: #000000;
+}
+#menuDrawer h2 {
+    margin: 10px;
+}
+
+#menuDrawer dl dt {
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
+#menuDrawer [data-oem="Accordion"] dt:before {
+    border-left:5px solid #999999;
+}
+
+#menuDrawer [data-oem="Accordion"] dt.expanded:before {
+    border-top:5px solid #999999;
+    border-left:5px solid transparent;
+}

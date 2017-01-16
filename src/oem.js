@@ -2653,9 +2653,9 @@ window.oem.Components = {};
     };
 
     Prototype.close = function(){
-        this.setIsOpen(false);
         this.getEl().classList.remove('--open');
         oem.events.dispatch(this.getEvents().closed, this);
+        this.setIsOpen(false);
         return this;
     };
 
@@ -2687,10 +2687,10 @@ window.oem.Components = {};
     };
 
     Prototype.open = function(){
-        this.setIsOpen(true);
         this.manageFullScreen();
         this.getEl().classList.add('--open');
         oem.events.dispatch(this.getEvents().opened, this);
+        this.setIsOpen(true);
         return this;
     };
 
@@ -3090,19 +3090,17 @@ window.oem.Components = {};
     });
 
     Prototype.init = function(){
-        this.isActive = false;
+        this._isActive = false;
         this.getEl().addEventListener('click', this.handleClick.bind(this));
     };
 
     Prototype.activate = function(){
-        this.isActive = true;
-        this.getEl().classList.add('--active');
+        this.setIsActive(true).getEl().classList.add('--active');
         return this;
     };
 
     Prototype.deactivate = function(){
-        this.isActive = false;
-        this.getEl().classList.remove('--active');
+        this.setIsActive(false).getEl().classList.remove('--active');
         return this;
     };
 
@@ -3111,8 +3109,17 @@ window.oem.Components = {};
         return this;
     };
 
+    Prototype.isActive = function(){
+        return this._isActive;
+    };
+
+    Prototype.setIsActive = function(isActive) {
+        this._isActive = isActive;
+        return this;
+    };
+
     Prototype.toggle = function(){
-        if(this.isActive){
+        if(this.isActive()){
             this.deactivate();
         } else {
             this.activate();
