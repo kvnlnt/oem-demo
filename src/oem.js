@@ -2618,37 +2618,50 @@ window.oem.Components = {};
     return COMPONENTS;
 
 })(oem.Components);
-(function(COMPONENTS, COMPONENT, PROTOTYPE) {
+(function(COMPONENTS, COMPONENT, EL, PROTOTYPE) {
 
-
-    // PROTOTYPE
-    // ========================================================
-    // This is the main prototype class for this component. It is meant to:
-    // 1) contain any/all functional behavior for this component.
-    // 2) be prototyped into a new instance for each component
     var Prototype = PROTOTYPE(COMPONENT, {
         type: "Drawer"
     });
 
+    Prototype.CLOSE_BUTTON_MODE = {
+        ALWAYS: "--close-btn-always",
+        ONLY_FULLSCREEN: "--close-btn-only-fullscreen",
+        NEVER: "--close-btn-never"
+    };
+
     Prototype.init = function(){
         this._isOpen = false;
         this.fullScreenAt = parseInt(this.getEl().dataset.oemFullScreenAt) || 0;
+        this.closeBtn = this.createCloseBtn();
+        this.closeBtnMode = this.getEl().dataset.oemCloseButtonMode || 'ALWAYS';
+        this.getEl().classList.add(Prototype.CLOSE_BUTTON_MODE[this.closeBtnMode]);
 
+        // add button to dom
+        this.getEl().appendChild(this.closeBtn);
+
+        // register vents
         var events = {};
         events.opened = this.getId() + ":opened";
         events.closed = this.getId() + ":closed";
         this.setEvents(events);
 
         oem.events.addEventListener(oem.EVENTS.WINDOW_RESIZED, this.manageFullScreen.bind(this));
+        this.closeBtn.addEventListener("click", this.close.bind(this));
 
         return this;
     };
 
     Prototype.close = function(){
+        this.setIsOpen(false);
         this.getEl().classList.remove('--open');
         oem.events.dispatch(this.getEvents().closed, this);
-        this.setIsOpen(false);
         return this;
+    };
+
+    Prototype.createCloseBtn = function(){
+        var btn = EL("button", {"class":"__closeBtn"}, EL("span"));
+        return btn;
     };
 
     Prototype.getFullScreenAt = function(){
@@ -2658,11 +2671,15 @@ window.oem.Components = {};
     Prototype.manageFullScreen = function(){
         var isFullScreen = window.innerWidth <= this.getFullScreenAt();
         if(isFullScreen) {
-             this.getEl().classList.add('--fullscreen')
+             this.getEl().classList.add('--fullscreen');
         } else {
-             this.getEl().classList.remove('--fullscreen')
+             this.getEl().classList.remove('--fullscreen');
         }
         return this;
+    };
+
+    Prototype.isFullScreen = function(){
+        return this.getEl().classList.contains('--fullscreen');
     };
 
     Prototype.isOpen = function(){
@@ -2670,10 +2687,10 @@ window.oem.Components = {};
     };
 
     Prototype.open = function(){
+        this.setIsOpen(true);
         this.manageFullScreen();
         this.getEl().classList.add('--open');
         oem.events.dispatch(this.getEvents().opened, this);
-        this.setIsOpen(true);
         return this;
     };
 
@@ -2695,7 +2712,7 @@ window.oem.Components = {};
     COMPONENTS.Drawer.Prototype = Prototype;
     return COMPONENTS;
 
-})(oem.Components, oem.Core.Component, oem.Core.Prototype);
+})(oem.Components, oem.Core.Component, oem.Core.El, oem.Core.Prototype);
 (function(COMPONENTS) {
 
     // Main component namespace
@@ -3073,15 +3090,34 @@ window.oem.Components = {};
     });
 
     Prototype.init = function(){
-        this.getEl().addEventListener('click', this.toggle.bind(this));
+        this.isActive = false;
+        this.getEl().addEventListener('click', this.handleClick.bind(this));
+    };
+
+    Prototype.activate = function(){
+        this.isActive = true;
+        this.getEl().classList.add('--active');
+        return this;
+    };
+
+    Prototype.deactivate = function(){
+        this.isActive = false;
+        this.getEl().classList.remove('--active');
+        return this;
+    };
+
+    Prototype.handleClick = function(){
+        this.toggle();
+        return this;
     };
 
     Prototype.toggle = function(){
-        if(this.getEl().classList.contains('--active')){
-            this.getEl().classList.remove('--active');
+        if(this.isActive){
+            this.deactivate();
         } else {
-            this.getEl().classList.add('--active');
+            this.activate();
         }
+        return this;
     };
 
     COMPONENTS.Hamburger.Prototype = Prototype;
