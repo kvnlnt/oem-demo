@@ -16,7 +16,6 @@ const Demo = function() {
 
 Demo.prototype = {
 
-
     handleServerRequest: function(req, res) {
         var that = this;
         fs.readFile("./src/index.html", 'utf8', function(err, data) {
