@@ -1,16 +1,26 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <title>OEM DEMO</title>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,minimal-ui"/>
-    <script src="./oem/deploy/all/oem.js"></script>
-    <link href="./oem/deploy/all/oem.css" rel="stylesheet" type="text/css"/>
-</head>
-
-<body>
-    DEMO
-</body>
-
+    <head>
+        <title>OEM DEMO</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,minimal-ui" />
+        <script src="./src/oem.js"></script>
+        <link href="./src/oem.css" rel="stylesheet" type="text/css" />
+        <script src="./src/script.js"></script>
+        <link href="./src/style.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body id="body">
+        <button id="hamburger" data-oem="Hamburger" data-oem-id="hamburger" onclick="oem.read('menuDrawer').toggle();">
+        <span>toggle menu</span>
+        </button>
+        <div id="menuDrawer" data-oem="Drawer" data-oem-id="menuDrawer" data-oem-full-screen-at="600" data-oem-close-button-mode="ONLY_FULLSCREEN">
+            <h2>GENESIS</h2>
+            <dl data-oem-id="menu" data-oem="Accordion">
+                <dt>GENESIS</dt>
+                <dd>1</dd>
+                <dt>EXODUS</dt>
+                <dd>C Contents</dd>
+            </dl>
+        </div>
+    </body>
 </html>

@@ -3,12 +3,15 @@ const app = express();
 const fs = require("fs-extra");
 const http = require('http');
 const exec = require('child_process').exec;
-const path = require('path');
 const chalk = require('chalk');
-const Deployment = require('./oem/cli/deploy').Deployment;
 
 const Demo = function() {
-    this.deployment = new Deployment('all');
+
+    exec('cd oem && node oem deploy all --autolaunch=false', function(error, stdout, stderr) {
+      fs.copySync('./oem/deploy/all/oem.js', './src/oem.js');
+      fs.copySync('./oem/deploy/all/oem.css', './src/oem.css');
+    });
+
     this.port = 7001;
     this.server;
     this.start();

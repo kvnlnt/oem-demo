@@ -1,0 +1,10 @@
+html,body,div,form,fieldset,legend,label{background-color:#000000;margin:0;padding:0}
+table{border-collapse:collapse;border-spacing:0}
+th,td{text-align:left;vertical-align:top}
+h1,h2,h3,h4,h5,h6,th,td,caption{font-weight:normal}
+img{border:0}
+section h1{font-size:32px}
+section h2{font-size:24px}
+section h3{font-size:20px}
+#hamburger{position:fixed;top:20px;right:20px}
+#menuDrawer h2{margin:10px;}
