@@ -2653,9 +2653,9 @@ window.oem.Components = {};
     };
 
     Prototype.close = function(){
+        this.setIsOpen(false);
         this.getEl().classList.remove('--open');
         oem.events.dispatch(this.getEvents().closed, this);
-        this.setIsOpen(false);
         return this;
     };
 
@@ -2687,10 +2687,10 @@ window.oem.Components = {};
     };
 
     Prototype.open = function(){
+        this.setIsOpen(true);
         this.manageFullScreen();
         this.getEl().classList.add('--open');
         oem.events.dispatch(this.getEvents().opened, this);
-        this.setIsOpen(true);
         return this;
     };
 
@@ -3090,17 +3090,19 @@ window.oem.Components = {};
     });
 
     Prototype.init = function(){
-        this._isActive = false;
+        this.isActive = false;
         this.getEl().addEventListener('click', this.handleClick.bind(this));
     };
 
     Prototype.activate = function(){
-        this.setIsActive(true).getEl().classList.add('--active');
+        this.isActive = true;
+        this.getEl().classList.add('--active');
         return this;
     };
 
     Prototype.deactivate = function(){
-        this.setIsActive(false).getEl().classList.remove('--active');
+        this.isActive = false;
+        this.getEl().classList.remove('--active');
         return this;
     };
 
@@ -3109,17 +3111,8 @@ window.oem.Components = {};
         return this;
     };
 
-    Prototype.isActive = function(){
-        return this._isActive;
-    };
-
-    Prototype.setIsActive = function(isActive) {
-        this._isActive = isActive;
-        return this;
-    };
-
     Prototype.toggle = function(){
-        if(this.isActive()){
+        if(this.isActive){
             this.deactivate();
         } else {
             this.activate();
@@ -3403,7 +3396,17 @@ window.oem.Components = {};
     // GETTERS
     // ========================================================
     Prototype.getComponent = function(){
-         return oem.read(this.component);
+         return this.component;
+    };
+
+    Prototype.getComponentEl = function(){
+        var isOemComponent = oem.read(this.getComponent());
+        if(isOemComponent){
+            return isOemComponent.getEl();
+        } else {
+            // if we didn't find it, it should at least be a valid DOM id
+            return document.getElementById(this.getComponent());
+        }
     };
 
     Prototype.getResponsiveClass = function(){
@@ -3434,7 +3437,6 @@ window.oem.Components = {};
             // if we didn't find it, it should at least be a valid DOM id
             return document.getElementById(this.getContainer());
         }
-        return this.watch;
     };
 
     // SETTERS
@@ -3472,7 +3474,7 @@ window.oem.Components = {};
     // METHODS
     // ========================================================
     Prototype.responsifier = function(){
-        var el = this.getComponent().getEl();
+        var el = this.getComponentEl();
         var container = this.getContainerEl();
         var width = container.offsetWidth;
         var height = container.offsetHeight;
