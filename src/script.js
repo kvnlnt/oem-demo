@@ -1,21 +1,35 @@
-function init(){
+var component = {
+    controller: function() {
+        var self = this;
+        self.onHamburgerClick = function(argument) { oem.read('menuDrawer').toggle(); };
+        self.onDrawerClose = function (argument) { oem.read('hamburger').deactivate(); }
+        oem.events.addEventListener(oem.EVENTS.COMPONENTS_INITIALIZED, function(){
+            oem.read("hamburger").getEl().addEventListener("click", self.onHamburgerClick);
+            oem.events.addEventListener(oem.read("menuDrawer").getEvents().closed, self.onDrawerClose);
+        });
+    },
+    view: function(ctrl) {
 
-    var components = {
-        hamburger: oem.read('hamburger'),
-        menuDrawer: oem.read("menuDrawer")
-    };
+        return [
+            m("h1", {}, "Genesis Haus"),
+            m("p", { "class": "tagline" }, "Dirt Don't Hurt"),
+            m("button", {
+                    "id": "hamburger",
+                    "data-oem": "Hamburger",
+                    "data-oem-id": "hamburger"
+                },
+                m("span", {}, "toggle menu")
+            ),
+            m("div", {
+                "id": "menuDrawer",
+                "data-oem": "Drawer",
+                "data-oem-id": "menuDrawer",
+                "data-oem-full-screen-at": 600,
+                "data-oem-close-button-mode": "ONLY_FULLSCREEN"
+            })
+        ];
 
-    function onDrawerClose(){ 
-        components.hamburger.deactivate();
     }
+};
 
-    function onHamburgerClick(){
-        components.menuDrawer.toggle();
-    }
-
-
-  oem.events.addEventListener(components.menuDrawer.getEvents().closed, onDrawerClose);
-  components.hamburger.getEl().addEventListener("click", onHamburgerClick);
-}
-
-oem.events.addEventListener(oem.EVENTS.COMPONENTS_INITIALIZED, init);
+m.mount(document.getElementById("demo"), component);
