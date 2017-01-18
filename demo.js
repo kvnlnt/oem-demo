@@ -21,7 +21,7 @@ Demo.prototype = {
 
     handleServerRequest: function(req, res) {
         var that = this;
-        fs.readFile("./src/index.html", 'utf8', function(err, data) {
+        fs.readFile("./src/demo.html", 'utf8', function(err, data) {
             res.send(data);
             res.end();
         });

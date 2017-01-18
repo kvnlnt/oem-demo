@@ -2653,9 +2653,9 @@ window.oem.Components = {};
     };
 
     Prototype.close = function(){
+        this.setIsOpen(false);
         this.getEl().classList.remove('--open');
         oem.events.dispatch(this.getEvents().closed, this);
-        this.setIsOpen(false);
         return this;
     };
 
@@ -2687,10 +2687,10 @@ window.oem.Components = {};
     };
 
     Prototype.open = function(){
+        this.setIsOpen(true);
         this.manageFullScreen();
         this.getEl().classList.add('--open');
         oem.events.dispatch(this.getEvents().opened, this);
-        this.setIsOpen(true);
         return this;
     };
 
@@ -2724,8 +2724,8 @@ window.oem.Components = {};
          * Validate field exists
          * @method     required
          */
-        required: function(val) {
-            var isValid = val !== null && val !== void 0 && val.length != 0 && val != false;
+        required: function(args) {
+            var isValid = args.val != null && args.val != void 0 && args.val.length != 0 && args.val != false;
             return isValid;
         },
 
@@ -3211,11 +3211,14 @@ window.oem.Components = {};
         events.initialized = this.getId() + ":initialized";
         this.setEvents(events);
 
-        // config reset button
-        this
-        .getEl()
-        .querySelector('[type="reset"]')
-        .addEventListener('click', this.reset.bind(this));
+        // config reset button if exists
+        var resetButton = this.getEl().querySelector('[type="reset"]');
+        if(resetButton){
+            this
+            .getEl()
+            .querySelector('[type="reset"]')
+            .addEventListener('click', this.reset.bind(this));
+        }
 
         // tell the world
         oem.events.dispatch(events.initialized, this);
@@ -3403,7 +3406,17 @@ window.oem.Components = {};
     // GETTERS
     // ========================================================
     Prototype.getComponent = function(){
-         return oem.read(this.component);
+         return this.component;
+    };
+
+    Prototype.getComponentEl = function(){
+        var isOemComponent = oem.read(this.getComponent());
+        if(isOemComponent){
+            return isOemComponent.getEl();
+        } else {
+            // if we didn't find it, it should at least be a valid DOM id
+            return document.getElementById(this.getComponent());
+        }
     };
 
     Prototype.getResponsiveClass = function(){
@@ -3434,7 +3447,6 @@ window.oem.Components = {};
             // if we didn't find it, it should at least be a valid DOM id
             return document.getElementById(this.getContainer());
         }
-        return this.watch;
     };
 
     // SETTERS
@@ -3472,7 +3484,7 @@ window.oem.Components = {};
     // METHODS
     // ========================================================
     Prototype.responsifier = function(){
-        var el = this.getComponent().getEl();
+        var el = this.getComponentEl();
         var container = this.getContainerEl();
         var width = container.offsetWidth;
         var height = container.offsetHeight;
