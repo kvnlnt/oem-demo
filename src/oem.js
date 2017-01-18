@@ -3090,17 +3090,19 @@ window.oem.Components = {};
     });
 
     Prototype.init = function(){
-        this._isActive = false;
+        this.isActive = false;
         this.getEl().addEventListener('click', this.handleClick.bind(this));
     };
 
     Prototype.activate = function(){
-        this.setIsActive(true).getEl().classList.add('--active');
+        this.isActive = true;
+        this.getEl().classList.add('--active');
         return this;
     };
 
     Prototype.deactivate = function(){
-        this.setIsActive(false).getEl().classList.remove('--active');
+        this.isActive = false;
+        this.getEl().classList.remove('--active');
         return this;
     };
 
@@ -3109,17 +3111,8 @@ window.oem.Components = {};
         return this;
     };
 
-    Prototype.isActive = function(){
-        return this._isActive;
-    };
-
-    Prototype.setIsActive = function(isActive) {
-        this._isActive = isActive;
-        return this;
-    };
-
     Prototype.toggle = function(){
-        if(this.isActive()){
+        if(this.isActive){
             this.deactivate();
         } else {
             this.activate();
