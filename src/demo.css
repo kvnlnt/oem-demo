@@ -100,6 +100,33 @@ dl.data dt {
 }
 
 /**
+ * COMPONENTS
+ */
+[data-oem-class="Button"].--hollow {
+    border: 1px solid darkseagreen;
+    color: darkseagreen;
+    opacity: 0.5;
+    text-transform: uppercase;
+}
+
+[data-oem="Validator"] {
+    color: brown;
+}
+
+[data-oem="TextInput"].--has-error > input {
+    border:2px solid brown;
+}
+
+[data-oem="TextInput"] > input {
+    border:2px solid black;
+}
+
+[data-oem="TextInput"] > input:focus {
+    outline: none !important;
+    border:2px solid burlywood;
+}
+
+/**
  * MOBILE FIRST
  */
 

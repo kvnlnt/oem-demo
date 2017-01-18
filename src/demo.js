@@ -105,11 +105,13 @@ var component = {
                         "data-oem-id":"submitWeatherForm",
                         "data-oem-form":"weatherForm",
                         "data-oem-class":"Button",
+                        "class":"--hollow",
                         "type":"submit"
                     }, "Go"),
                     m("button", {
                         "data-oem":"Button",
                         "data-oem-id":"resetWeatherForm",
+                        "data-oem-class":"Button",
                         "class":"--hollow",
                         "type":"reset"
                     }, "reset")
