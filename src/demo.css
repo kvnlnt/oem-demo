@@ -1,269 +1,94 @@
 /**
  * Imports
  */
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css');
 
 /**
  * RESET
  */
-html, body, div, form, fieldset, legend, label {
-    margin: 0;
-    padding: 0;
-}
-body {
-    max-width: 640px;
-    margin:0 auto;
-}
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-th, td {
-    text-align: left;
-    vertical-align: top;
-}
-h1, h2, h3, h4, h5, h6, th, td, caption {
-    font-weight: normal;
-}
-img {
-    border: 0;
-}
-section h1 {
-    font-size: 32px;
-}
-section h2 {
-    font-size: 24px;
-}
-section h3 {
-    font-size: 20px;
-}
+html,
+body,
+div,
+form,
+fieldset,
+legend,
+label { margin: 0; padding: 0; }
+body { margin: 0 auto; }
+table { border-collapse: collapse; border-spacing: 0; }
+th,
+td { text-align: left; vertical-align: top; }
 
 /**
  * GLOBALS
  */
-* {
-    transition: all 0.5s;
-}
-
-html, body {
-    background-color: #333333;
-    color: #FFFFFF;
-}
+* { transition: all 0.5s; }
+html,
+body { background-color: #333333; color: #FFFFFF; }
 
 /**
  * TYPOGRAPHY
  */
-
-* {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-}
-
-h3 {
-    font-size: 14px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: 500;
-    line-height: 15.4px;
-}
-
-p {
-    font-size: 14px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: 400;
-    line-height: 20px;
-}
-blockquote {
-    font-size: 21px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: 400;
-    line-height: 30px;
-}
-pre {
-    font-size: 13px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: 400;
-    line-height: 18.5714px;
-}
-
-dt, dd, dl {
-    margin:0;
-}
-
-dl.data dt {
-    font-weight: bold;
-    line-height: 64px;
-    text-transform: uppercase;
-}
+* { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+h3 { font-size: 14px; font-style: normal; font-variant: normal; font-weight: 500; line-height: 15.4px; }
+p { font-size: 14px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 20px; }
+blockquote { font-size: 21px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 30px; }
+pre { font-size: 13px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 18.5714px; }
+dt,
+dd,
+dl { margin: 0; }
+dl.data dt { font-weight: bold; line-height: 64px; text-transform: uppercase; }
 
 /**
  * COMPONENTS
  */
-[data-oem-class="Button"].--hollow {
-    border: 1px solid darkseagreen;
-    color: darkseagreen;
-    opacity: 0.5;
-    text-transform: uppercase;
+[data-oem-class="Button"].--hollow { border: 1px solid darkseagreen; color: darkseagreen; opacity: 0.5; text-transform: uppercase; }
+[data-oem="Validator"] { color: brown; }
+[data-oem="TextInput"].--has-error > input { border: 2px solid brown; }
+[data-oem="TextInput"] > input { border: 2px solid black; }
+[data-oem="TextInput"] > input:focus { outline: none !important; border: 2px solid burlywood; }
+
+.weather-list .weather-list__item i,
+.weather-list .weather-list__item span
+{
+  line-height: 32px;
+  display: inline-block;
 }
 
-[data-oem="Validator"] {
-    color: brown;
+.weather-list .weather-list__item i {
+  color: burlywood;
+  margin-right: 10px;
+  font-size: 24px;
 }
 
-[data-oem="TextInput"].--has-error > input {
-    border:2px solid brown;
+.weather-list .weather-list__temp {
+  color: darkseagreen;
 }
 
-[data-oem="TextInput"] > input {
-    border:2px solid black;
-}
-
-[data-oem="TextInput"] > input:focus {
-    outline: none !important;
-    border:2px solid burlywood;
+.weather-list .weather-list__time {
+  color: darkseagreen;
+  font-size: 12px;
+  margin-right: 10px;
+  opacity: 0.5;
 }
 
 /**
  * MOBILE FIRST
  */
-
-#demo {
-    max-width: 960px;
-    margin:0 auto;
-    padding:100px 50px;
-}
-
-h1 {
-    font-size: 34px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: 500;
-    line-height: 26.4px;
-    text-transform: uppercase;
-    letter-spacing: 5px;
-    color: burlywood;
-}
-
-p.tagline {
-    font-size: 15px;
-    color: darkseagreen;
-    line-height: 28px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-}
-
-#hamburger {
-    position: fixed;
-    visibility: visible;
-    opacity: 0.3;
-    overflow: hidden;
-    top: 20px;
-    right: 20px;
-    background-color: transparent;
-    transition: all 0.5s;
-}
-
-#menuDrawer {
-    background-color: burlywood;
-    text-align: center;
-}
-
-#menuDrawer i.fa {
-    font-size: 55px;
-    margin-top:34px;
-    display: block;
-}
-
-.clock-circle {
-  width: 50px;
-  height: 50px;
-  margin: 0 auto;
-  position: fixed;
-  bottom:20px;
-  left:20px;
-  border: 1px solid burlywood;
-  border-radius: 0;
-}
-
-.clock-face {
-  width: 100%;
-  height: 100%;
-}
-
-.clock-face:after {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 4px;
-  height: 4px;
-  margin: -2px 0 0 -2px;
-  background: darkseagreen;
-  border-radius: 0px;
-  content: "";
-  display: block;
-}
-
-.clock-hour {
-  width: 0;
-  height: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: -2px 0 -2px -25%;
-  padding: 2px 0 2px 25%;
-  background: darkseagreen;
-  -webkit-transform-origin: 100% 50%;
-  -ms-transform-origin: 100% 50%;
-  transform-origin: 100% 50%;
-  border-radius: 4px 0 0 4px;
-}
-
-.clock-minute {
-  width: 0;
-  height: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: -40% 0px 0;
-  padding: 40% 1px 0;
-  background: darkseagreen;
-  -webkit-transform-origin: 50% 100%;
-  -ms-transform-origin: 50% 100%;
-  transform-origin: 50% 100%;
-  border-radius: 0;
-}
-
-.clock-second {
-  width: 0;
-  height: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: -40% -1px 0 0;
-  padding: 40% 1px 0;
-  background: darkseagreen;
-  -webkit-transform-origin: 50% 100%;
-  -ms-transform-origin: 50% 100%;
-  transform-origin: 50% 100%;
-}
+#demo { max-width: 960px; margin: 0 auto; padding: 100px 50px; }
+h1 { font-size: 34px; font-style: normal; font-variant: normal; font-weight: 500; line-height: 26.4px; text-transform: uppercase; letter-spacing: 5px; color: burlywood; }
+p.tagline { font-size: 15px; color: darkseagreen; line-height: 28px; letter-spacing: 3px; text-transform: uppercase; }
+#hamburger { position: fixed; visibility: visible; opacity: 0.3; overflow: hidden; top: 20px; right: 20px; background-color: transparent; transition: all 0.5s; }
+#menuDrawer { background-color: burlywood; text-align: center; }
+#menuDrawer i.fa { font-size: 55px; margin-top: 34px; display: block; }
+.clock-circle { width: 50px; height: 50px; margin: 0 auto; position: fixed; bottom: 20px; right: 20px; border: 1px solid burlywood; border-radius: 0; }
+.clock-face { width: 100%; height: 100%; }
+.clock-face:after { position: absolute; top: 50%; left: 50%; width: 4px; height: 4px; margin: -2px 0 0 -2px; background: darkseagreen; border-radius: 0px; content: ""; display: block; }
+.clock-hour { width: 0; height: 0; position: absolute; top: 50%; left: 50%; margin: -2px 0 -2px -25%; padding: 2px 0 2px 25%; background: darkseagreen; -webkit-transform-origin: 100% 50%; -ms-transform-origin: 100% 50%; transform-origin: 100% 50%; border-radius: 4px 0 0 4px; }
+.clock-minute { width: 0; height: 0; position: absolute; top: 50%; left: 50%; margin: -40% 0px 0; padding: 40% 1px 0; background: darkseagreen; -webkit-transform-origin: 50% 100%; -ms-transform-origin: 50% 100%; transform-origin: 50% 100%; border-radius: 0; }
+.clock-second { width: 0; height: 0; position: absolute; top: 50%; left: 50%; margin: -40% -1px 0 0; padding: 40% 1px 0; background: darkseagreen; -webkit-transform-origin: 50% 100%; -ms-transform-origin: 50% 100%; transform-origin: 50% 100%; }
 
 /** 
  * DESKTOP
  */
-#demo.--desktop #hamburger {
-    visibility: hidden;
-    opacity: 0;
-}
-
-#demo.--desktop h1 {
-    font-size: 55px;
-    line-height: 26.4px;
-}
-
-#demo.--desktop p.tagline {
-    font-size: 21px;
-    letter-spacing: 13px;
-}
+#demo.--desktop h1 { font-size: 55px; line-height: 26.4px; }
+#demo.--desktop p.tagline { font-size: 21px; letter-spacing: 13px; }
