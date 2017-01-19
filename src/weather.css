@@ -80,6 +80,18 @@ p.tagline { font-size: 15px; color: darkseagreen; line-height: 28px; letter-spac
 #hamburger { position: fixed; visibility: visible; opacity: 0.3; overflow: hidden; top: 20px; right: 20px; background-color: transparent; transition: all 0.5s; }
 #menuDrawer { background-color: burlywood; text-align: center; }
 #menuDrawer i.fa { font-size: 55px; margin-top: 34px; display: block; }
+#menuDrawer .location-link {
+  font-size: 24px;
+  display: block;
+  line-height: 55px;
+  cursor: pointer;
+  color: #333333;
+  border-bottom:1px dashed #333333;
+}
+#menuDrawer .location-link:hover {
+  background-color: #333333;
+  color: burlywood;
+}
 .clock-circle { width: 50px; height: 50px; margin: 0 auto; position: fixed; bottom: 20px; right: 20px; border: 1px solid burlywood; border-radius: 0; }
 .clock-face { width: 100%; height: 100%; }
 .clock-face:after { position: absolute; top: 50%; left: 50%; width: 4px; height: 4px; margin: -2px 0 0 -2px; background: darkseagreen; border-radius: 0px; content: ""; display: block; }

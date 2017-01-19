@@ -5,23 +5,28 @@ const http = require('http');
 const exec = require('child_process').exec;
 const chalk = require('chalk');
 
-const Demo = function() {
+const Demo = function(demo, deployment) {
+    var self = this;
+    self.deployment = deployment || 'all';
+    self.demo = demo || 'weather';
+    self.port = 7001;
 
-    exec('cd oem && node oem deploy all --autolaunch=false', function(error, stdout, stderr) {
-      fs.copySync('./oem/deploy/all/oem.js', './src/oem.js');
-      fs.copySync('./oem/deploy/all/oem.css', './src/oem.css');
+    exec('cd oem && node oem deploy '+self.deployment+' --autolaunch=false', function(error, stdout, stderr) {
+      fs.copySync('./oem/deploy/'+self.deployment+'/oem.js', './src/oem.js');
+      fs.copySync('./oem/deploy/'+self.deployment+'/oem.js', './src/oem.min.js');
+      fs.copySync('./oem/deploy/'+self.deployment+'/oem.css', './src/oem.css');
+      fs.copySync('./oem/deploy/'+self.deployment+'/oem.js', './src/oem.min.js');
     });
 
-    this.port = 7001;
-    this.server;
-    this.start();
+    self.server;
+    self.start();
 };
 
 Demo.prototype = {
 
     handleServerRequest: function(req, res) {
         var that = this;
-        fs.readFile("./src/demo.html", 'utf8', function(err, data) {
+        fs.readFile("./src/"+this.demo+".html", 'utf8', function(err, data) {
             res.send(data);
             res.end();
         });
@@ -35,7 +40,8 @@ Demo.prototype = {
         console.log(chalk.bgWhite("       "));
         console.log("");
         console.log("");
-        console.log("Component:", this.component);
+        console.log("Demo:", this.demo);
+        console.log("Deployment", this.deployment);
         console.log("Server:", "http://localhost:" + this.port);
         exec('open http://localhost:' + this.port);
         console.log("");
@@ -55,4 +61,5 @@ Demo.prototype = {
     
 };
 
-new Demo();
+const ARGS = process.argv.filter(function(arg, i){ return i > 1; });
+new Demo(ARGS[0], ARGS[1]);

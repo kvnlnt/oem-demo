@@ -7,10 +7,16 @@ var Main = {
 
         self.key = "572413c05e0144bde1ec6ac48e964a7e";
         self.weather = m.prop([]);
-        self.city = m.prop(null);
-        self.zip = m.prop(null);
+        self.city = m.prop("Bellingham");
+        self.zip = m.prop(98226);
 
         // Funcs
+        
+        self.changeZip = function(e){
+            var zip = e.target.dataset.zip;
+            oem.read('menuDrawer').close();
+            self.getWeather(zip);
+        };
 
         self.groupDays = function(list) {
             var groupings = [];
@@ -153,11 +159,11 @@ var Main = {
                 "data-oem-full-screen-at": 450,
                 "data-oem-close-button-mode": "ONLY_FULLSCREEN"
             }, [
-                m("i", { "class": "fa fa-facebook-square", "aria-hidden": "true" }),
-                m("i", { "class": "fa fa-linkedin-square", "aria-hidden": "true" }),
-                m("i", { "class": "fa fa-twitter-square", "aria-hidden": "true" }),
-                m("i", { "class": "fa fa-instagram", "aria-hidden": "true" }),
-                m("i", { "class": "fa fa-snapchat-square", "aria-hidden": "true" })
+                m("a", { "class": "location-link", "data-zip": "98101", "onclick":ctrl.changeZip }, "Seattle"),
+                m("a", { "class": "location-link", "data-zip": "10014", "onclick":ctrl.changeZip }, "New York"),
+                m("a", { "class": "location-link", "data-zip": "90013", "onclick":ctrl.changeZip }, "Los Angeles"),
+                m("a", { "class": "location-link", "data-zip": "60604", "onclick":ctrl.changeZip }, "Chicago"),
+                m("a", { "class": "location-link", "data-zip": "77001", "onclick":ctrl.changeZip }, "Houston")
             ]),
             m("div", {
                 "data-oem": "Responsifier",
