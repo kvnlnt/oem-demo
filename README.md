@@ -3,19 +3,16 @@ Demo site for the oem framework https://github.com/kvnlnt/oem
 
 # Setup
 
-Install demo dependencies
+Install demo dependencies:
 
-    npm install
+    npm i
 
-Install oem (it's a submodule)
+Install oem:
 
     git submodule init
-
-Install oem's dependencies
-
+    git submodule update
     cd oem
-    npm install
-
+    npm i
 
 # Run
 
